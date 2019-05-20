@@ -40,8 +40,8 @@ public class GenerateOrderNum {
                     orderNumCount = 0L;
                 }
                 //组装订单号
-                String countStr=maxPerMSECSize +orderNumCount+"";
-                finOrderNum=nowLong+countStr.substring(1);
+                String countStr = maxPerMSECSize +orderNumCount+"";
+                finOrderNum = nowLong + countStr.substring(1);
                 orderNumCount++;
                 System.out.println(finOrderNum + "--" + Thread.currentThread().getName() + "::" + tname );
                 // Thread.sleep(1000);
