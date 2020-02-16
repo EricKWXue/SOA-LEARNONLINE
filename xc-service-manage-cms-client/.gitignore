@@ -1,5 +1,4 @@
 .idea/
-logs/
 target/
 *.iml
 pom.xml.tag

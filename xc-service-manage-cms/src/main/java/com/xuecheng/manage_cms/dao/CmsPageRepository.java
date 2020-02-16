@@ -13,13 +13,22 @@ public interface CmsPageRepository extends MongoRepository<CmsPage, String> {
     /**
      * 根据页面名称和类型查询
      */
-    CmsPage findByPageNameAndPageType(String pageName,String pageType);
+    CmsPage findByPageNameAndPageType(String pageName, String pageType);
     /**
      * 根据站点和页面类型查询记录数
      */
-    int countBySiteIdAndPageType(String siteId,String pageType);
+    int countBySiteIdAndPageType(String siteId, String pageType);
     /**
      * 根据站点和页面类型分页查询
      */
     Page<CmsPage> findBySiteIdAndPageType(String siteId, String pageType, Pageable pageable);
+
+    /**
+     * 校验是否已经存在该页面
+     * @param pageName
+     * @param siteId
+     * @param pageWebPath
+     * @return
+     */
+    CmsPage findByPageNameAndSiteIdAndPageWebPath(String pageName, String siteId, String pageWebPath);
 }

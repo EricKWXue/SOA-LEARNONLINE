@@ -1,0 +1,22 @@
+server:
+  port: 31000
+spring:
+  application:
+    name: xc‐service‐manage‐cms‐client
+  data:
+    mongodb:
+      uri: mongodb://root:root@47.101.134.66:27017
+      database: xc_cms
+  kafka:
+    #消费者
+    consumer:
+      bootstrap-servers: 47.101.134.66:9092
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+xuecheng:
+  kafka:
+    #cms客户端监控的队列名称（不同的客户端监控的队列不能重复）
+    #queue: queue_cms_postpage_01
+    #此routingKey为门户站点ID
+    #routingKey: 5a751fab6abb5044e0d19ea1
+    topic: 5a751fab6abb5044e0d19ea1

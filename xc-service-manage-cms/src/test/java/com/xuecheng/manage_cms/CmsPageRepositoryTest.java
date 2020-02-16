@@ -7,9 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -61,11 +59,27 @@ public class CmsPageRepositoryTest {
 
     @Test
     public void testUpdatePage(){
-        Optional<CmsPage> optional = cmsPageRepository.findOne("123");
-        if(optional.isPresent()){
-            CmsPage cmsPage = optional.get();
-            cmsPage.setPageName("测试页面01");
-            cmsPageRepository.save(cmsPage);
-        }
+        CmsPage cmsPage = new CmsPage();
+        cmsPage.setPageId("5a754adf6abb500ad05688d9");
+        Example<CmsPage> cmsPageExample = Example.of(cmsPage);
+        Optional<CmsPage> optional = cmsPageRepository.findOne(cmsPageExample);
+        optional.ifPresent(cmsPageResult -> {
+            System.out.println(cmsPageResult);
+        });
+    }
+
+    @Test
+    public void testFindAll(){
+        ExampleMatcher matching = ExampleMatcher.matching().withMatcher("pageAliase", ExampleMatcher.GenericPropertyMatchers.contains());
+        //条件值
+        CmsPage cmsPage = new CmsPage();
+        //cmsPage.setSiteId("5a751fab6abb5044e0d19ea1");
+        cmsPage.setPageAliase("分类");
+        //cmsPage.setTemplateId("5a962c16b00ffc514038fafd");
+
+        Example<CmsPage> example = Example.of(cmsPage, matching);
+        Pageable pageable= PageRequest.of(0, 10);
+        Page<CmsPage> all = cmsPageRepository.findAll(example, pageable);
+        all.forEach(System.out::println);
     }
 }
